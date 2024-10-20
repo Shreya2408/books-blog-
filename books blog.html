@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookworm Haven</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 1em;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 2em;
+      background-color: white;
+      margin: 2em auto;
+      width: 80%;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1em;
+      background-color: #333;
+      color: white;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    ul {
+      margin-top: 1em;
+    }
+
+    .comments {
+      margin-top: 2em;
+      border-top: 1px solid #ddd;
+      padding-top: 1em;
+    }
+
+    .comment-form {
+      margin-top: 1em;
+    }
+
+    .comment-form textarea {
+      width: 100%;
+      padding: 1em;
+      margin-bottom: 1em;
+    }
+
+    .comment-form button {
+      padding: 0.5em 2em;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Bookworm Haven</h1>
+    <nav>
+      <ul>
+        <li><a id="home-link">Home</a></li>
+        <li><a id="reviews-link">Reviews</a></li>
+        <li><a id="authors-link">Author Spotlight</a></li>
+        <li><a id="contact-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home" class="active">
+    <h2>Recent Reviews</h2>
+    <article>
+      <h3>Book Title 1</h3>
+      <p>Quick review of Book Title 1. <a href="#" class="read-more" data-target="Book Title 1">Read more...</a></p>
+    </article>
+    <article>
+      <h3>Book Title 2</h3>
+      <p>Quick review of Book Title 2. <a href="#" class="read-more" data-target="Book Title 2">Read more...</a></p>
+    </article>
+
+    <h2>Book Recommendations</h2>
+    <ul>
+      <li><strong>Book Title 3</strong> - A great mystery novel.</li>
+      <li><strong>Book Title 4</strong> - A must-read fantasy series.</li>
+    </ul>
+  </section>
+
+  <!-- Reviews Section -->
+  <section id="reviews">
+    <h2>Book Reviews</h2>
+    <article class="review">
+      <h3>Book Title 1</h3>
+      <p><strong>Author:</strong> Author Name</p>
+      <p><strong>Genre:</strong> Mystery</p>
+      <p><strong>Rating:</strong> ★★★★☆</p>
+      <p><strong>Synopsis:</strong> A brief synopsis of the book...</p>
+
+      <h3>User Comments</h3>
+      <div class="comments">
+        <p><strong>User1:</strong> Great review! I loved this book.</p>
+      </div>
+
+      <form class="comment-form">
+        <label for="comment">Add a comment:</label>
+        <textarea id="comment" rows="4"></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </article>
+    <article class="review">
+      <h3>Book Title 2</h3>
+      <p><strong>Author:</strong> Another Author</p>
+      <p><strong>Genre:</strong> Fantasy</p>
+      <p><strong>Rating:</strong> ★★★★☆</p>
+      <p><strong>Synopsis:</strong> Another brief synopsis of the book...</p>
+    </article>
+  </section>
+
+  <!-- Author Spotlight Section -->
+  <section id="authors">
+    <h2>Author Spotlight</h2>
+    <article>
+      <h3>Author Name 1</h3>
+      <p>Biography and list of works...</p>
+    </article>
+    <article>
+      <h3>Author Name 2</h3>
+      <p>Biography and list of works...</p>
+    </article>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+      <label for="message">Message:</label>
+      <textarea id="message" rows="4" required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Bookworm Haven</p>
+  </footer>
+
+  <script>
+    // Navigation
+    const sections = {
+      home: document.getElementById('home'),
+      reviews: document.getElementById('reviews'),
+      authors: document.getElementById('authors'),
+      contact: document.getElementById('contact')
+    };
+
+    document.getElementById('home-link').addEventListener('click', () => showSection('home'));
+    document.getElementById('reviews-link').addEventListener('click', () => showSection('reviews'));
+    document.getElementById('authors-link').addEventListener('click', () => showSection('authors'));
+    document.getElementById('contact-link').addEventListener('click', () => showSection('contact'));
+
+    function showSection(sectionId) {
+      for (let section in sections) {
+        sections[section].classList.remove('active');
+      }
+      sections[sectionId].classList.add('active');
+    }
+
+    // "Read more" links to navigate to Reviews section
+    document.querySelectorAll('.read-more').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        showSection('reviews');
+      });
+    });
+
+    // Comment Form
+    document.querySelector('.comment-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const comment = document.querySelector('#comment').value;
+      const commentSection = document.querySelector('.comments');
+
+      if (comment) {
+        const newComment = document.createElement('p');
+        newComment.innerHTML = `<strong>You:</strong> ${comment}`;
+        commentSection.appendChild(newComment);
+        document.querySelector('#comment').value = '';
+      }
+    });
+  </script>
+
+</body>
+</html>
